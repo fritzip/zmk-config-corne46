@@ -5,7 +5,6 @@
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
@@ -56,10 +55,10 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&rgb_ug RGB_COLOR_HSB(0,100,51)  &kp Q         &kp W         &kp E            &kp R            &kp T            &none  &none  &kp Y          &kp U           &kp I          &kp O         &kp P           &none
-&none                            &u_mt LGUI A  &u_mt LALT S  &u_mt LCTRL D    &u_mt LSHFT F    &kp G            &none  &none  &kp H          &u_mt LSHFT J   &u_mt LCTRL K  &u_mt LALT L  &u_mt LGUI SQT  &none
-&none                            &u_lt 2 Z     &u_mt RALT X  &kp C            &kp V            &kp B                          &kp N          &kp M           &kp COMMA      &kp DOT       &u_lt 2 FSLH    &none
-                                                             &u_lt MEDIA ESC  &u_lt NAV SPACE  &u_lt MOUSE TAB                &u_lt SYM RET  &u_lt NUM BSPC  &u_lt FUN DEL
+&rgb_ug RGB_COLOR_HSB(96,100,51)  &kp Q         &kp W         &kp E            &kp R            &kp T            &none  &none  &kp Y          &kp U           &kp I          &kp O         &kp P           &none
+&none                             &u_mt LGUI A  &u_mt LALT S  &u_mt LCTRL D    &u_mt LSHFT F    &kp G            &none  &none  &kp H          &u_mt LSHFT J   &u_mt LCTRL K  &u_mt LALT L  &u_mt LGUI SQT  &none
+&none                             &u_lt 2 Z     &u_mt RALT X  &kp C            &kp V            &kp B                          &kp N          &kp M           &kp COMMA      &kp DOT       &u_lt 2 FSLH    &none
+                                                              &u_lt MEDIA ESC  &u_lt NAV SPACE  &u_lt MOUSE TAB                &u_lt SYM RET  &u_lt NUM BSPC  &u_lt FUN DEL
             >;
         };
 
