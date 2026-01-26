@@ -63,10 +63,10 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&rgb_ug RGB_COLOR_HSB(96,100,51)  &kp Q         &kp W         &kp E            &kp R            &kp T      &kp BACKSPACE  &none  &kp Y      &kp U           &kp I          &kp O         &kp P         &kp CARET
-&kp LEFT_SHIFT                    &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D    &HMRL LSHFT F    &kp G      &none          &none  &kp H      &HMRR LSHFT J   &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI M  &kp PERCENT
-&kp LCTRL                         &kp Z         &kp X         &kp C            &kp V            &kp B                            &kp N      &kp M           &kp COMMA      &kp DOT       &kp SLASH     &none
-                                                              &HMRR MEDIA ESC  &HMRR NAV SPACE  &kp SPACE                        &kp ENTER  &HMRR NUM BSPC  &HMRR FUN DEL
+&rgb_ug RGB_COLOR_HSB(96,100,51)  &kp Q         &kp W         &kp E          &kp R           &kp T      &kp BACKSPACE  &none  &kp Y      &kp U          &kp I          &kp O         &kp P         &kp CARET
+&kp LEFT_SHIFT                    &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D  &HMRL LSHFT F   &kp G      &none          &none  &kp H      &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI M  &kp PERCENT
+&kp LCTRL                         &kp Z         &kp X         &kp C          &kp V           &kp B                            &kp N      &kp M          &kp COMMA      &kp DOT       &kp SLASH     &none
+                                                              &lt 3 ESC      &lt 1 LEFT_GUI  &kp SPACE                        &kp ENTER  &lt 2 BSPC     &lt 4 DEL
             >;
         };
 
