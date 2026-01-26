@@ -43,6 +43,13 @@
             quick-tap-ms = <200>;
             require-prior-idle-ms = <150>;
         };
+
+        DTTab: DTTab {
+            compatible = "zmk,behavior-tap-dance";
+            label = "DTTAB";
+            #binding-cells = <0>;
+            bindings = <&kp TAB>, <&kp ESCAPE>;
+        };
     };
 };
 
@@ -63,10 +70,10 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&kp TAB         &kp Q         &kp W         &kp E          &kp R           &kp T        &kp ESCAPE  &kp BACKSPACE  &kp Y          &kp U          &kp I          &kp O         &kp P                 &kp LEFT_BRACKET
-&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D  &HMRL LSHFT F   &kp G        &kp ENTER   &kp ENTER      &kp H          &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI SEMICOLON  &kp SQT
-&kp LCTRL       &kp Z         &kp X         &kp C          &kp V           &kp B                                   &kp N          &kp M          &kp COMMA      &kp PERIOD    &kp SLASH             &kp RIGHT_SHIFT
-                                            &lt 3 LGUI     &lt 2 LEFT_ALT  &lt 1 SPACE                             &kp BACKSPACE  &lt 2 DELETE   &lt 4 RALT
+&DTTab          &kp Q         &kp W         &kp E          &kp R           &kp T        &kp BACKSPACE  &kp BACKSPACE  &kp Y       &kp U          &kp I          &kp O         &kp P                 &kp LEFT_BRACKET
+&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D  &HMRL LSHFT F   &kp G        &kp ENTER      &kp ENTER      &kp H       &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI SEMICOLON  &kp SQT
+&kp LCTRL       &kp Z         &kp X         &kp C          &kp V           &kp B                                      &kp N       &kp M          &kp COMMA      &kp PERIOD    &kp SLASH             &kp RIGHT_BRACKET
+                                            &lt 3 LGUI     &lt 2 LEFT_ALT  &lt 1 SPACE                                &kp RETURN  &lt 2 DELETE   &lt 4 RALT
             >;
         };
 
