@@ -18,22 +18,30 @@
 
 / {
     behaviors {
-        u_mt: u_mt {
+        HMRL: HMRL {
             compatible = "zmk,behavior-hold-tap";
-            label = "u_mt";
+            label = "HMRL";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+
+            hold-while-undecided;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <7 8 9 10 11 12 13 21 22 23 24 25 26 27 34 35 36 37 38 39 43 44 45>;
         };
 
-        u_lt: u_lt {
+        HMRR: HMRR {
             compatible = "zmk,behavior-hold-tap";
-            label = "u_lt";
+            label = "HMRR";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
-            bindings = <&mo>, <&kp>;
+            bindings = <&kp>, <&kp>;
+
+            hold-trigger-key-positions = <0 0 1 2 14 15 16 28 29 30 1 2 3 4 5 6 15 16 17 18 19 20 29 30 31 32 33 40 41 42>;
+            hold-while-undecided;
+            hold-trigger-on-release;
         };
     };
 };
@@ -55,10 +63,10 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&rgb_ug RGB_COLOR_HSB(96,100,51)  &kp Q         &kp W         &kp E            &kp R            &kp T            &none  &none  &kp Y          &kp U           &kp I          &kp O         &kp P           &none
-&none                             &u_mt LGUI A  &u_mt LALT S  &u_mt LCTRL D    &u_mt LSHFT F    &kp G            &none  &none  &kp H          &u_mt LSHFT J   &u_mt LCTRL K  &u_mt LALT L  &u_mt LGUI SQT  &none
-&none                             &u_lt 2 Z     &u_mt RALT X  &kp C            &kp V            &kp B                          &kp N          &kp M           &kp COMMA      &kp DOT       &u_lt 2 FSLH    &none
-                                                              &u_lt MEDIA ESC  &u_lt NAV SPACE  &u_lt MOUSE TAB                &u_lt SYM RET  &u_lt NUM BSPC  &u_lt FUN DEL
+&rgb_ug RGB_COLOR_HSB(96,100,51)  &kp Q         &kp W         &kp E            &kp R            &kp T      &kp BACKSPACE  &none  &kp Y      &kp U           &kp I          &kp O         &kp P         &kp CARET
+&kp LEFT_SHIFT                    &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D    &HMRL LSHFT F    &kp G      &none          &none  &kp H      &HMRR LSHFT J   &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI M  &kp PERCENT
+&kp LCTRL                         &kp Z         &kp X         &kp C            &kp V            &kp B                            &kp N      &kp M           &kp COMMA      &kp DOT       &kp SLASH     &none
+                                                              &HMRR MEDIA ESC  &HMRR NAV SPACE  &kp SPACE                        &kp ENTER  &HMRR NUM BSPC  &HMRR FUN DEL
             >;
         };
 
