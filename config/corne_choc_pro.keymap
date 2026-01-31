@@ -44,31 +44,6 @@
             quick-tap-ms = <200>;
             require-prior-idle-ms = <150>;
         };
-
-        DTTab: DTTab {
-            compatible = "zmk,behavior-tap-dance";
-            label = "DTTAB";
-            #binding-cells = <0>;
-            bindings = <&kp TAB>, <&kp ESCAPE>;
-        };
-
-        DTCced: DTCced {
-            compatible = "zmk,behavior-tap-dance";
-            label = "DTCCED";
-            #binding-cells = <0>;
-
-            /*
-             * BÉPO helper (host OS set to BÉPO):
-             * - 1 tap: send the keycode for the physical key that produces 'c' on BÉPO
-             *          (that's H in ZMK / US scancodes)
-             * - 2 taps: ç (via the missing BÉPO scancode, which is SQT in ZMK)
-             *
-             * Uppercase stays accessible: hold Shift (e.g. your home-row shift)
-             * while double-tapping to produce Ç.
-             */
-
-            bindings = <&kp H>, <&kp BACKSLASH>;
-        };
     };
 };
 
@@ -87,20 +62,11 @@
         compatible = "zmk,combos";
 
         /* Top-row right edge on BÉPO: 'w' lives on the key that is '[' in US scancodes. */
-
-        bepo_w {
-            timeout-ms = <40>;
-            key-positions = <13 23>;
-            bindings = <&kp LEFT_BRACKET>;
-            layers = <0>;
-        };
-
         /* Home-row right edge on BÉPO: 'ç' lives on the key that is '\'' in US scancodes. */
 
-        bepo_ccedilla {
-            timeout-ms = <40>;
-            key-positions = <23 27>;
-            bindings = <&kp SQT>;
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <0 13>;
             layers = <0>;
         };
     };
@@ -123,10 +89,10 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&DTTab          &kp Q         &kp W         &kp E          &kp R          &kp T        &kp BACKSPACE  &kp BACKSPACE  &kp Y         &kp U          &kp I          &kp O         &kp P                 &kp LEFT_BRACKET
-&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S  &HMRL LCTRL D  &HMRL LSHFT F  &kp G        &kp ENTER      &kp ENTER      &DTCced       &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L  &HMRR LGUI SEMICOLON  &kp SQT
-&kp LCTRL       &kp Z         &kp X         &kp C          &kp V          &kp B                                      &kp N         &kp M          &kp COMMA      &kp PERIOD    &kp SLASH             &kp RIGHT_BRACKET
-                                            &lt 3 LALT     &lt 2 LCMD     &lt 1 SPACE                                &lt 4 RETURN  &lt 5 DELETE   &lt 6 RALT
+&kp TAB         &kp Q         &kp W              &kp E          &kp R          &kp T        &kp BACKSPACE  &kp RIGHT_BRACKET  &kp Y         &kp U          &kp I          &kp O                   &kp P                 &kp LEFT_BRACKET
+&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S       &HMRL LCTRL D  &HMRL LSHFT F  &kp G        &kp ENTER      &kp ENTER          &kp H         &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L            &HMRR LGUI SEMICOLON  &kp SQT
+&kp LCTRL       &kp Z         &HMRL X RIGHT_ALT  &kp C          &kp V          &kp B                                          &kp N         &kp M          &kp COMMA      &HMRR PERIOD RIGHT_ALT  &kp SLASH             &kp BACKSPACE
+                                                 &lt 3 LALT     &lt 2 LCMD     &lt 1 SPACE                                    &lt 4 RETURN  &lt 5 DELETE   &lt 6 RALT
             >;
         };
 
@@ -174,10 +140,10 @@
              */
 
             bindings = <
-&none  &kp LBKT   &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp RBKT   &none  &none  &trans  &trans     &trans     &trans    &trans    &none
-&none  &kp SEMI   &kp LS(N4)  &kp LS(N5)  &kp LS(N6)  &kp EQUAL  &none  &none  &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
-&none  &kp GRAVE  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp BSLH                 &trans  &trans     &trans     &kp RALT  &trans    &none
-                              &kp DOT     &kp LS(N0)  &kp MINUS                &trans  &trans     &trans
+&kp TAB  &kp LBKT   &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp RBKT   &none  &none  &trans  &trans     &trans     &trans    &trans    &none
+&none    &kp SEMI   &kp LS(N4)  &kp LS(N5)  &kp LS(N6)  &kp EQUAL  &none  &none  &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
+&none    &kp GRAVE  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp BSLH                 &trans  &trans     &trans     &kp RALT  &trans    &none
+                                &kp DOT     &kp LS(N0)  &kp MINUS                &trans  &trans     &trans
             >;
         };
 
