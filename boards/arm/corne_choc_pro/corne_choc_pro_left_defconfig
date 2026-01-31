@@ -48,6 +48,9 @@ CONFIG_BT_GATT_ENFORCE_SUBSCRIPTION=n
 # Enable ZMK Studio (alpha)
 CONFIG_ZMK_STUDIO=y
 
+# Enable combos (used for BÉPO W/Ç)
+CONFIG_ZMK_COMBO=y
+
 # Improved connection stability
 CONFIG_ZMK_BLE_EXPERIMENTAL_CONN=y
 

@@ -53,6 +53,35 @@
     };
 };
 
+/*
+ * Combos
+ *
+ * Note: combos are position-based (not character-based).
+ * With your host OS set to BÉPO, these combos emit the *missing scan codes*
+ * for the physical keys that would normally produce W and Ç on a full keyboard.
+ *
+ * Uppercase is automatic: hold Shift while triggering the combo.
+ */
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        /* Top-row right edge on BÉPO: 'w' lives on the key that is '[' in US scancodes. */
+        bepo_w {
+            timeout-ms = <40>;
+            key-positions = <11 12>; /* O + P */
+            bindings = <&kp LEFT_BRACKET>;
+        };
+
+        /* Home-row right edge on BÉPO: 'ç' lives on the key that is '\'' in US scancodes. */
+        bepo_ccedilla {
+            timeout-ms = <40>;
+            key-positions = <36 37>; /* COMMA + PERIOD */
+            bindings = <&kp SQT>;
+        };
+    };
+};
+
 // Define Layers
 
 #define BASE 0
