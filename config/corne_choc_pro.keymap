@@ -72,7 +72,7 @@
 
         bepo_w {
             timeout-ms = <40>;
-            key-positions = <13 23>; /* O + P */
+            key-positions = <13 23>;
             bindings = <&kp LEFT_BRACKET>;
             layers = <0>;
         };
@@ -81,7 +81,7 @@
 
         bepo_ccedilla {
             timeout-ms = <40>;
-            key-positions = <23 27>; /* COMMA + PERIOD */
+            key-positions = <23 27>;
             bindings = <&kp SQT>;
             layers = <0>;
         };
