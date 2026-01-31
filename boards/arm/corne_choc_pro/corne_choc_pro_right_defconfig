@@ -51,7 +51,3 @@ CONFIG_ZMK_BLE_EXPERIMENTAL_CONN=y
 # Mouse emulation
 CONFIG_ZMK_POINTING=y
 
-# Enable combos (used for BÉPO W/Ç)
-CONFIG_ZMK_COMBO=y
-
-
