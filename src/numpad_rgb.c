@@ -1,11 +1,22 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/led_strip.h>
 #include <zephyr/kernel.h>
+#include <zephyr/init.h>
 
-#include <zmk/event_manager.h>
-#include <zmk/events/layer_state_changed.h>
+/*
+ * This module intentionally avoids ZMK's event manager APIs.
+ * Some ZMK revisions do not ship <zmk/event_manager.h>, which breaks builds.
+ *
+ * Instead, we run a lightweight periodic worker that checks whether the NUM
+ * layer is active and, if so, writes a per-LED mask to the underglow strip.
+ */
+
+#if __has_include(<zmk/keymap.h>)
 #include <zmk/keymap.h>
-#include <zmk/rgb_underglow.h>
+#define HAS_ZMK_KEYMAP 1
+#else
+#define HAS_ZMK_KEYMAP 0
+#endif
 
 #if !DT_HAS_CHOSEN(zmk_underglow)
 #error "A zmk,underglow chosen node must be declared"
@@ -13,6 +24,13 @@
 
 #define STRIP_NODE DT_CHOSEN(zmk_underglow)
 #define STRIP_LEN DT_PROP(STRIP_NODE, chain_length)
+
+#ifndef CONFIG_ZMK_CORNE_NUMPAD_RGB_REFRESH_MS
+#define CONFIG_ZMK_CORNE_NUMPAD_RGB_REFRESH_MS 40
+#endif
+
+#define NUMPAD_RGB_ACTIVE_REFRESH K_MSEC(CONFIG_ZMK_CORNE_NUMPAD_RGB_REFRESH_MS)
+#define NUMPAD_RGB_IDLE_REFRESH K_MSEC(200)
 
 /*
  * Mapping assumption:
@@ -67,6 +85,21 @@ static bool is_numpad_keypos(uint8_t keypos) {
     }
 }
 
+static int set_all_off(void) {
+    const struct device *strip = DEVICE_DT_GET(STRIP_NODE);
+    if (!device_is_ready(strip)) {
+        return -ENODEV;
+    }
+
+    static struct led_rgb pixels[STRIP_LEN];
+
+    for (int i = 0; i < STRIP_LEN; i++) {
+        pixels[i] = (struct led_rgb){.r = 0, .g = 0, .b = 0};
+    }
+
+    return led_strip_update_rgb(strip, pixels, STRIP_LEN);
+}
+
 static int set_numpad_pattern(void) {
     const struct device *strip = DEVICE_DT_GET(STRIP_NODE);
     if (!device_is_ready(strip)) {
@@ -87,45 +120,47 @@ static int set_numpad_pattern(void) {
 }
 
 static bool last_num_active;
-static bool underglow_was_on;
 
-static int numpad_rgb_listener(const zmk_event_t *eh) {
-#if !IS_ENABLED(CONFIG_ZMK_CORNE_NUMPAD_RGB)
-    ARG_UNUSED(eh);
-    return -ENOTSUP;
-#else
-    if (!as_zmk_layer_state_changed(eh)) {
-        return -ENOTSUP;
+static struct k_work_delayable numpad_rgb_work;
+
+static void numpad_rgb_work_handler(struct k_work *work) {
+    ARG_UNUSED(work);
+
+    const struct device *strip = DEVICE_DT_GET(STRIP_NODE);
+    if (!device_is_ready(strip)) {
+        (void)k_work_schedule(&numpad_rgb_work, K_SECONDS(1));
+        return;
     }
 
+#if !HAS_ZMK_KEYMAP
+    /* Can't query active layers on this ZMK revision; fail safely. */
+    (void)k_work_schedule(&numpad_rgb_work, K_SECONDS(1));
+    return;
+#else
     bool num_active = zmk_keymap_layer_active(CONFIG_ZMK_CORNE_NUMPAD_RGB_NUM_LAYER_ID);
 
-    if (num_active == last_num_active) {
-        return 0;
-    }
-
-    last_num_active = num_active;
-
     if (num_active) {
-        (void)zmk_rgb_underglow_get_state(&underglow_was_on);
-
-        /* Stop the built-in underglow animator so it doesn't overwrite our per-key pattern. */
-        (void)zmk_rgb_underglow_off();
-
-        /* Apply our numpad mask (blue) + background (off). */
+        /* Keep writing while NUM is active so it stays overridden. */
         (void)set_numpad_pattern();
-    } else {
-        /* Restore the user's underglow state (on/off + effect) when leaving NUM. */
-        if (underglow_was_on) {
-            (void)zmk_rgb_underglow_on();
-        } else {
-            (void)zmk_rgb_underglow_off();
-        }
+        last_num_active = true;
+        (void)k_work_schedule(&numpad_rgb_work, NUMPAD_RGB_ACTIVE_REFRESH);
+        return;
     }
 
-    return 0;
+    /* Leaving NUM: ensure we don't leave stale blue LEDs behind. */
+    if (last_num_active) {
+        (void)set_all_off();
+        last_num_active = false;
+    }
+
+    (void)k_work_schedule(&numpad_rgb_work, NUMPAD_RGB_IDLE_REFRESH);
 #endif
 }
 
-ZMK_LISTENER(numpad_rgb, numpad_rgb_listener);
-ZMK_SUBSCRIPTION(numpad_rgb, zmk_layer_state_changed);
+static int numpad_rgb_init(void) {
+    k_work_init_delayable(&numpad_rgb_work, numpad_rgb_work_handler);
+    (void)k_work_schedule(&numpad_rgb_work, NUMPAD_RGB_IDLE_REFRESH);
+    return 0;
+}
+
+SYS_INIT(numpad_rgb_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);

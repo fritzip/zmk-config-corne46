@@ -3,10 +3,19 @@ menu "zmk-config extras"
 config ZMK_CORNE_NUMPAD_RGB
     bool "Highlight NUM layer numpad keys (RGB)"
     depends on ZMK_RGB_UNDERGLOW
-  default n
+    default y if BOARD_CORNE_CHOC_PRO_LEFT || BOARD_CORNE_CHOC_PRO_RIGHT
     help
       When the NUM layer is active, this temporarily takes over the WS2812 strip
       and lights only the numpad cluster in blue, turning the rest off.
+
+config ZMK_CORNE_NUMPAD_RGB_REFRESH_MS
+    int "Refresh period (ms)"
+    depends on ZMK_CORNE_NUMPAD_RGB
+    default 40
+    help
+      How often to rewrite the LED mask while NUM is active.
+      Smaller values reduce flicker if other RGB effects are running,
+      but increase power use.
 
 config ZMK_CORNE_NUMPAD_RGB_NUM_LAYER_ID
     int "NUM layer id"
