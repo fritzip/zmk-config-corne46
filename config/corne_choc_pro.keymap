@@ -23,7 +23,7 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HMRL";
             #binding-cells = <2>;
-            tapping-term-ms = <280>;
+            tapping-term-ms = <200>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
 
@@ -36,7 +36,7 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HMRR";
             #binding-cells = <2>;
-            tapping-term-ms = <280>;
+            tapping-term-ms = <200>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
 
@@ -89,19 +89,19 @@
         default_layer {
             display-name = "MIRYOKU";
             bindings = <
-&kp TAB         &kp Q         &kp W              &kp E          &kp R          &kp T        &kp BACKSPACE  &kp RIGHT_BRACKET  &kp Y         &kp U          &kp I          &kp O                   &kp P                 &kp LEFT_BRACKET
-&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S       &HMRL LCTRL D  &HMRL LSHFT F  &kp G        &kp ENTER      &kp ENTER          &kp H         &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L            &HMRR LGUI SEMICOLON  &kp SQT
-&kp LCTRL       &kp Z         &HMRL RIGHT_ALT X  &kp C          &kp V          &kp B                                          &kp N         &kp M          &kp COMMA      &HMRR RIGHT_ALT PERIOD  &kp SLASH             &kp BACKSPACE
-                                                 &lt 3 LALT     &lt 2 LCMD     &lt 1 SPACE                                    &lt 4 RETURN  &lt 5 DELETE   &lt 6 RALT
+&kp TAB         &kp Q         &kp W              &kp E          &kp R          &kp T        &kp BACKSPACE  &kp BACKSPACE  &kp Y         &kp U          &kp I          &kp O                   &kp P                 &kp LEFT_BRACKET
+&kp LEFT_SHIFT  &HMRL LGUI A  &HMRL LALT S       &HMRL LCTRL D  &HMRL LSHFT F  &kp G        &kp ENTER      &kp ENTER      &kp H         &HMRR LSHFT J  &HMRR LCTRL K  &HMRR LALT L            &HMRR LGUI SEMICOLON  &kp SQT
+&kp LCTRL       &kp Z         &HMRL RIGHT_ALT X  &kp C          &kp V          &kp B                                      &kp N         &kp M          &kp COMMA      &HMRR RIGHT_ALT PERIOD  &kp SLASH             &kp BACKSPACE
+                                                 &lt 3 LALT     &lt 2 LCMD     &lt 1 SPACE                                &lt 4 RETURN  &lt 5 DELETE   &lt 6 RALT
             >;
         };
 
         nav_layer {
             display-name = "NAV";
             bindings = <
-&none  &bootloader  &trans    &trans     &trans     &trans  &none  &none  &trans  &trans    &trans     &trans     &trans     &none
+&none  &bootloader  &trans    &trans     &trans     &trans  &none  &none  &trans  &trans    &trans     &trans     &trans     &kp RIGHT_BRACKET
 &none  &kp LGUI     &kp LALT  &kp LCTRL  &kp LSHFT  &none   &none  &none  &trans  &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &none
-&none  &none        &kp RALT  &trans     &trans     &none                 &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &none
+&none  &none        &kp RALT  &trans     &trans     &none                 &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &kp BACKSLASH
                               &trans     &trans     &trans                &trans  &trans    &trans
             >;
         };
@@ -109,20 +109,20 @@
         mouse_layer {
             display-name = "MOUSE";
             bindings = <
-&none  &trans    &trans    &trans     &trans     &trans  &none  &none  &trans     &trans          &trans          &trans        &trans           &none
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none   &none  &none  &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none
-&none  &none     &kp RALT  &trans     &trans     &none                 &trans     &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none
-                           &trans     &trans     &trans                &mkp LCLK  &mkp RCLK       &mkp MCLK
+&none  &trans    &trans    &trans     &trans        &trans  &none  &none  &trans     &trans          &trans          &trans        &trans           &none
+&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT     &none   &none  &none  &trans     &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none
+&none  &none     &kp RALT  &trans     &trans        &none                 &trans     &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none
+                           &trans     &kp LEFT_GUI  &trans                &mkp LCLK  &mkp RCLK       &mkp MCLK
             >;
         };
 
         media_layer {
             display-name = "MEDIA";
             bindings = <
-&none  &trans    &trans    &trans     &trans     &trans  &none  &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &bt BT_SEL 0
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none   &none  &none  &out OUT_TOG     &kp C_PREV       &kp C_VOL_DN     &kp C_VOL_UP     &kp C_NEXT       &bt BT_SEL 1
-&none  &none     &kp RALT  &trans     &trans     &none                 &trans           &kp C_STOP       &kp C_PP         &kp C_MUTE       &trans           &bt BT_SEL 2
-                           &trans     &trans     &trans                &trans           &trans           &trans
+&none  &trans    &trans    &trans        &trans     &trans  &none  &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &bt BT_SEL 0
+&none  &kp LGUI  &kp LALT  &kp LCTRL     &kp LSHFT  &none   &none  &none  &out OUT_TOG     &kp C_PREV       &kp C_VOL_DN     &kp C_VOL_UP     &kp C_NEXT       &bt BT_SEL 1
+&none  &none     &kp RALT  &trans        &trans     &none                 &trans           &kp C_STOP       &kp C_PP         &kp C_MUTE       &trans           &bt BT_SEL 2
+                           &kp LEFT_ALT  &trans     &trans                &trans           &trans           &trans
             >;
         };
 
@@ -172,10 +172,10 @@
         fun_layer {
             display-name = "FUN";
             bindings = <
-&none  &kp F12  &kp F7  &kp F8     &kp F9     &kp PSCRN    &none  &none  &trans  &trans     &trans     &trans    &trans    &none
-&none  &kp F11  &kp F4  &kp F5     &kp F6     &kp SLCK     &none  &none  &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
-&none  &kp F10  &kp F1  &kp F2     &kp F3     &kp C_PAUSE                &trans  &trans     &trans     &kp RALT  &trans    &none
-                        &kp K_APP  &kp SPACE  &kp TAB                    &trans  &trans     &trans
+&none  &kp F12  &kp F7  &kp F8     &kp F9     &kp PSCRN    &none  &none  &trans  &trans     &trans         &trans    &trans    &none
+&none  &kp F11  &kp F4  &kp F5     &kp F6     &kp SLCK     &none  &none  &none   &kp LSHFT  &kp LCTRL      &kp LALT  &kp LGUI  &none
+&none  &kp F10  &kp F1  &kp F2     &kp F3     &kp C_PAUSE                &trans  &trans     &trans         &kp RALT  &trans    &none
+                        &kp K_APP  &kp SPACE  &kp TAB                    &trans  &trans     &kp RIGHT_ALT
             >;
         };
     };
