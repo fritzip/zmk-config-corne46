@@ -162,10 +162,10 @@
              */
 
             bindings = <
-&none  &kp N1     &kp N2    &kp N3     &kp N4      &kp N5     &none  &none  &trans  &trans     &trans     &trans    &trans    &none
-&none  &kp N6     &kp N7    &kp N8     &kp N9      &kp N0     &none  &none  &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
-&none  &kp GRAVE  &kp SEMI  &kp COMMA  &kp PERIOD  &kp SLASH                &trans  &trans     &trans     &kp RALT  &trans    &none
-                            &kp TILDE  &kp MINUS   &kp EQUAL                &trans  &trans     &trans
+&kp TILDE  &kp N1     &kp N2    &kp N3     &kp N4      &kp N5     &none  &none  &trans  &trans     &trans     &trans    &trans    &none
+&none      &kp N6     &kp N7    &kp N8     &kp N9      &kp N0     &none  &none  &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
+&none      &kp GRAVE  &kp SEMI  &kp COMMA  &kp PERIOD  &kp SLASH                &trans  &trans     &trans     &kp RALT  &trans    &none
+                                &kp TILDE  &kp MINUS   &kp EQUAL                &trans  &trans     &trans
             >;
         };
 
