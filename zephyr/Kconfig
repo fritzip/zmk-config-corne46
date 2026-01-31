@@ -3,7 +3,7 @@ menu "zmk-config extras"
 config ZMK_CORNE_NUMPAD_RGB
     bool "Highlight NUM layer numpad keys (RGB)"
     depends on ZMK_RGB_UNDERGLOW
-    default y if BOARD_CORNE_CHOC_PRO_LEFT || BOARD_CORNE_CHOC_PRO_RIGHT
+  default n
     help
       When the NUM layer is active, this temporarily takes over the WS2812 strip
       and lights only the numpad cluster in blue, turning the rest off.
