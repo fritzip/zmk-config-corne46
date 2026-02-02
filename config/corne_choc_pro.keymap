@@ -77,21 +77,21 @@
         ccedilla {
             bindings = <&kp BACKSLASH>;
             key-positions = <22 23>;
-            timeout-ms = <30>;
+            timeout-ms = <60>;
             layers = <0>;
         };
 
         wbepo {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <23 13>;
-            timeout-ms = <30>;
+            timeout-ms = <60>;
             layers = <0>;
         };
 
         wbepo2 {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <9 10>;
-            timeout-ms = <30>;
+            timeout-ms = <60>;
             layers = <0>;
         };
     };
