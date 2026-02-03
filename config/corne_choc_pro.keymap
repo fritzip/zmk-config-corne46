@@ -94,6 +94,11 @@
             timeout-ms = <60>;
             layers = <0>;
         };
+
+        lock {
+            bindings = <&kp K_LOCK>;
+            key-positions = <1 12>;
+        };
     };
 };
 
