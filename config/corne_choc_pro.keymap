@@ -120,7 +120,7 @@
         nav_layer {
             display-name = "NAV";
             bindings = <
-&none  &bootloader  &trans    &trans     &trans     &trans  &none  &none  &trans  &trans    &trans     &trans     &trans     &kp RIGHT_BRACKET
+&none  &bootloader  &trans    &trans     &trans     &trans  &none  &none  &trans  &kp LC(X) &kp LC(C)  &kp LC(V)  &trans     &kp RIGHT_BRACKET
 &none  &kp LGUI     &kp LALT  &kp LCTRL  &kp LSHFT  &none   &none  &none  &trans  &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &none
 &none  &none        &kp RALT  &trans     &trans     &none                 &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &kp BACKSLASH
                               &trans     &trans     &trans                &trans  &trans    &trans
